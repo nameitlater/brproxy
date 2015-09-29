@@ -25,7 +25,7 @@ backend with minimal fuss.  Neither [WebStorm](https://youtrack.jetbrains.com/is
     ```
     
 ## Limitations
-This package will not proxy for HttpRequest in Dartium.  The Dart definition of the DOM API's is seperate from JavaScript definition. See issue [24462](https://github.com/dart-lang/sdk/issues/24462). It might be reasonable at some point in time to create a drop in replacement for BrowserClient.
+This package will not proxy for HttpRequest in Dartium.  The Dart definition of the DOM API's is seperate from JavaScript definition. See issue [24462](https://github.com/dart-lang/sdk/issues/24462). It might be reasonable at some point in time to create a drop in replacement for BrowserClient as a workaround.
 
 ## Features and bugs
 
