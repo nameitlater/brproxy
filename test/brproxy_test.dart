@@ -3,11 +3,12 @@
 @TestOn('browser')
 library brproxy.test;
 
+import 'dart:js';
+import 'dart:async';
+import 'dart:html';
 import 'package:brproxy/brproxy.dart' as brp;
 import 'package:test/test.dart';
 import 'package:http/browser_client.dart';
-import 'dart:js';
-import 'dart:async';
 
 void main() {
   group('basic tests', () {
@@ -108,7 +109,18 @@ void main() {
       expect(client.callMethod('response',[]),equals('{"status":"ok"}'));
     });
 
+      test('should work with BrowserClient', () async {
+        brp.remote = "https://cors-test.appspot.com";
+        var client = new BrowserClient();
+        var response = await client.get('http://sub.host.invalid:8080/test');
+        expect(response.body,equals('{"status":"ok"}'));
+      }, skip: 'https://github.com/dart-lang/sdk/issues/24462');
 
+    test('should work with HttpRequest', () async {
+      brp.remote = "https://cors-test.appspot.com";
+      var response = await HttpRequest.getString('http://sub.host.invalid:8080/test');
+      expect(response,equals('{"status":"ok"}'));
+    }, skip: 'https://github.com/dart-lang/sdk/issues/24462');
 
   });
 }
